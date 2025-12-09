@@ -3,76 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT BTech Level 8 - NGOMA College</title>
+    <title>About Us | BTech Level 8</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* About page specific styles */
+        .about-hero {
+            padding-top: 140px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: var(--radius-lg);
+            padding: 4rem 2rem;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .about-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .feature-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .curriculum-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .curriculum-item {
+            background: var(--gradient-card);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .curriculum-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .curriculum-number {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-accent);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 60px;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 12px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            border: 4px solid var(--bg-primary);
+        }
+        
+        .timeline-content {
+            background: var(--gradient-card);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+        }
+        
+        .stats-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">NGOMA College</div>
-            <ul class="nav-links">
-                <li><a href="/home">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/gallery">Curriculum</a></li>
-                <li><a href="/contact">Contact</a></li>
+    <!-- Navigation -->
+    <nav class="navbar glass-dark">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">BTECH<span style="color:var(--accent-primary)">8</span></a>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Dashboard</a></li>
+                <li><a href="about.html" class="nav-link active">About</a></li>
+                <li><a href="gallery.html" class="nav-link">Projects</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="#" class="btn btn-primary">Login <i class="fas fa-sign-in-alt"></i></a></li>
             </ul>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <main>
-        <section id="hero" class="hero">
-            <div class="hero-content">
-                <h1>IT BTech Level 8</h1>
-                <p>Advanced Technology & Innovation</p>
-                <button class="cta-btn">Explore Program</button>
+    <!-- About Hero -->
+    <section class="section">
+        <div class="container">
+            <div class="about-hero">
+                <h1 class="fade-in">About <span style="background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">BTech Level 8</span></h1>
+                <p class="lead fade-in" style="max-width: 700px; margin: 0 auto;">
+                    The pinnacle of technical education, combining cutting-edge technology with innovative research to shape the engineers of tomorrow.
+                </p>
             </div>
-        </section>
 
-        <section id="about" class="about">
-            <h2>About the Program</h2>
-            <div class="cards-container">
-                <div class="card">
-                    <i class="fas fa-graduation-cap"></i>
+            <!-- Program Overview -->
+            <div class="text-center mb-3">
+                <h2>Program Overview</h2>
+                <p style="max-width: 800px; margin: 0 auto;">
+                    BTech Level 8 is an advanced technology program designed to equip students with industry-ready skills through hands-on projects, cutting-edge research, and collaboration with industry partners. Our curriculum is constantly updated to reflect the latest technological trends.
+                </p>
+            </div>
+
+            <!-- Key Features -->
+            <h2 class="section-title">Why Choose BTech Level 8?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
                     <h3>Expert Faculty</h3>
-                    <p>Learn from industry professionals with years of experience.</p>
+                    <p>Learn from industry professionals with 10+ years of experience in tech companies and research institutions.</p>
                 </div>
-                <div class="card">
-                    <i class="fas fa-laptop-code"></i>
-                    <h3>Hands-On Learning</h3>
-                    <p>Practical projects and real-world applications.</p>
+                
+                <div class="feature-card card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Hands-On Projects</h3>
+                    <p>Work on real-world projects with industry partners and cutting-edge technology stacks.</p>
                 </div>
-                <div class="card">
-                    <i class="fas fa-network-wired"></i>
+                
+                <div class="feature-card card">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
                     <h3>Modern Technology</h3>
-                    <p>Latest tools and frameworks in the tech industry.</p>
+                    <p>Access to latest tools and frameworks including AI/ML, Cloud Computing, IoT, and Blockchain.</p>
                 </div>
             </div>
-        </section>
 
-        <section id="curriculum" class="curriculum">
-            <h2>Curriculum Highlights</h2>
-            <ul class="curriculum-list">
-                <li><strong>Advanced Web Technologies</strong> - Full-stack development</li>
-                <li><strong>Cloud Computing</strong> - AWS, Azure, GCP</li>
-                <li><strong>AI & Machine Learning</strong> - Data science applications</li>
-                <li><strong>Cybersecurity</strong> - Network security & encryption</li>
-                <li><strong>Capstone Project</strong> - Industry-based solution</li>
-            </ul>
-        </section>
-
-        <section id="contact" class="contact">
-            <h2>Get in Touch</h2>
-            <div class="contact-info">
-                <p><i class="fas fa-envelope"></i> Email: info@ngomacollege.edu</p>
-                <p><i class="fas fa-phone"></i> Phone: +1 (555) 123-4567</p>
-                <p><i class="fas fa-map-marker-alt"></i> Location: NGOMA College Campus</p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 NGOMA College - IT BTech Level 8. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+            <!-- Curriculum -->
+            <h2 class="section-title">Curriculum Highlights</h2>
+            
+            <div class="curriculum-list">
+                <div class="curriculum-item">
+                    <div class="curriculum-number">1</div>
+                    <div>
+                        <h4>Advanced Web Technologies</h4>
+                        <p>Full-stack development with modern frameworks (React, Node.js, Django) and cloud deployment</p>
+                    </div>
+                </div>
+                
+                <div class="curriculum-item">
+                    <div class="curriculum-number">2</div>
+                    <div>
+                        <h4>Cloud Computing</h4>
+                        <p>AWS, Azure, GCP certifications and distributed systems architecture</p>
+                    </div>
+                </div>
+                
+                <div class="curriculum-item">
+                    <div class="curriculum-number">3</div>
+                    <div>
+                        <h4>AI & Machine Learning</h4>
+                        <p>Data science, neural networks, computer vision, and natural language processing</p>
+                    </div>
+                </div>
+                
+                <div class="curriculum-item">
+                    <div class="curriculum-number">4</div>
+                    <div>
+                        <h4>Cybersecurity</h4>
+                        <p>Network security, cryptography, ethical hacking, and blockchain

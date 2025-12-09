@@ -1,1076 +1,347 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="BTech Level 8 final year dashboard for managing modules, capstone projects, and research progress">
-    <title>BTech Level 8 — Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTech Level 8 | Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ==============================================
-           CSS CUSTOM PROPERTIES
-           ============================================== */
-        :root {
-            /* Colors */
-            --bg-primary: #0f1724;
-            --bg-secondary: #07112a;
-            --accent: #6ee7b7;
-            --text-primary: #e6eef8;
-            --text-muted: #9aa7bf;
-            --card-bg: #0b1220;
-            --glass: rgba(255,255,255,0.03);
-            --glass-light: rgba(255,255,255,0.02);
-            
-            /* Spacing */
-            --spacing-xs: 6px;
-            --spacing-sm: 8px;
-            --spacing-md: 12px;
-            --spacing-lg: 16px;
-            --spacing-xl: 22px;
-            --spacing-2xl: 28px;
-            
-            /* Border Radius */
-            --radius-sm: 8px;
-            --radius-md: 10px;
-            --radius-lg: 12px;
-            --radius-xl: 14px;
-            
-            /* Shadows */
-            --shadow-sm: 0 6px 18px rgba(3,15,18,0.45);
-            --shadow-md: 0 8px 40px rgba(2,6,23,0.55);
-            --shadow-lg: 0 18px 40px rgba(2,6,23,0.6);
-            --shadow-xl: 0 40px 120px rgba(2,6,23,0.8);
+        /* Home page specific styles */
+        .hero {
+            padding-top: 140px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-
-        /* ==============================================
-           BASE STYLES
-           ============================================== */
-        * {
-            box-sizing: border-box;
-        }
-
-        html, body {
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            margin: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            z-index: -1;
         }
-
-        body {
-            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            color: var(--text-primary);
-            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 60%);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            line-height: 1.45;
-            padding-bottom: 60px;
+        
+        .lead {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: var(--text-secondary);
         }
-
-        /* ==============================================
-           LAYOUT
-           ============================================== */
-        .container {
-            max-width: 1100px;
-            margin: 36px auto;
-            padding: var(--spacing-2xl);
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
         }
-
-        /* ==============================================
-           HEADER
-           ============================================== */
-        .header {
+        
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-card:nth-child(1) .stat-icon { color: var(--accent-primary); }
+        .stat-card:nth-child(2) .stat-icon { color: var(--accent-secondary); }
+        .stat-card:nth-child(3) .stat-icon { color: #00ff88; }
+        .stat-card:nth-child(4) .stat-icon { color: #ff6b6b; }
+        
+        .stat-card h3 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-image {
+            height: 200px;
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-xl);
+            justify-content: center;
+            overflow: hidden;
         }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
+        
+        .project-image i {
+            font-size: 4rem;
+            color: white;
+            opacity: 0.8;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .quick-links .card {
+            text-align: center;
+            padding: 2rem;
+            transition: transform 0.3s ease;
             text-decoration: none;
             color: inherit;
         }
-
-        .brand__logo {
-            width: 56px;
-            height: 56px;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, #1f2937, #0ea5a8);
-            display: grid;
-            place-items: center;
-            font-weight: 800;
-            color: #072023;
-            box-shadow: 0 6px 24px rgba(2,6,23,0.6), inset 0 -6px 18px rgba(255,255,255,0.03);
-        }
-
-        .brand__info h1 {
-            font-size: 18px;
-            margin: 0;
-        }
-
-        .brand__subtitle {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        /* Navigation */
-        .nav {
-            display: flex;
-            gap: 14px;
-            align-items: center;
-        }
-
-        .nav__link {
-            color: var(--text-muted);
-            text-decoration: none;
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.2s ease;
-        }
-
-        .nav__link:hover {
-            background: var(--glass);
-            color: var(--accent);
-        }
-
-        /* ==============================================
-           HERO SECTION
-           ============================================== */
-        .hero {
-            background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-            padding: var(--spacing-2xl);
-            border-radius: var(--radius-xl);
-            display: grid;
-            grid-template-columns: 1fr 380px;
-            gap: var(--spacing-xl);
-            align-items: center;
-            box-shadow: var(--shadow-md);
-        }
-
-        .hero__content h2 {
-            margin: 0;
-            font-size: 30px;
-            letter-spacing: -0.4px;
-        }
-
-        .hero__content p {
-            color: var(--text-muted);
-            margin-top: 10px;
-        }
-
-        .hero__actions {
-            margin-top: 18px;
-            display: flex;
-            gap: var(--spacing-md);
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .hero__stats {
-            display: flex;
-            gap: 14px;
-            margin-top: 18px;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            background: var(--glass-light);
-            padding: 10px var(--spacing-md);
-            border-radius: var(--radius-md);
-            font-weight: 700;
-        }
-
-        /* ==============================================
-           BUTTONS
-           ============================================== */
-        .btn {
-            padding: 10px 14px;
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 700;
-            border: 1px solid rgba(255,255,255,0.04);
-            background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn--primary {
-            background: linear-gradient(90deg, #06b6d4, #34d399);
-            color: #042427;
-            box-shadow: 0 8px 20px rgba(52,211,153,0.12);
-            border: none;
-        }
-
-        .btn--ghost {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.04);
-            padding: var(--spacing-sm) 10px;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        /* ==============================================
-           CARDS
-           ============================================== */
-        .card {
-            background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-            padding: var(--spacing-lg);
-            border-radius: var(--radius-lg);
-        }
-
-        .card__header {
-            display: flex;
-            gap: var(--spacing-md);
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: var(--spacing-md);
-        }
-
-        .card__title {
-            font-weight: 800;
-        }
-
-        .card__subtitle {
-            color: var(--text-muted);
-            font-size: 13px;
-            margin-top: var(--spacing-xs);
-        }
-
-        .card__meta {
-            text-align: right;
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-
-        /* Quick Links Card */
-        .quick-links__preview {
-            height: 200px;
-            border-radius: var(--radius-md);
-            display: grid;
-            place-items: center;
-            background: linear-gradient(135deg, #041123, #08314a);
-            box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .quick-links__chips {
-            display: flex;
-            gap: var(--spacing-sm);
-            flex-wrap: wrap;
-        }
-
-        .chip {
-            background: var(--card-bg);
-            padding: var(--spacing-sm) 10px;
-            border-radius: var(--radius-md);
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        /* ==============================================
-           PROJECTS SECTION
-           ============================================== */
-        .section-title {
-            margin-top: 24px;
-            margin-bottom: var(--spacing-lg);
-            font-size: 20px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: var(--spacing-lg);
-        }
-
-        .project-card {
-            background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-md);
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.03);
-            transition: transform 0.18s ease, box-shadow 0.18s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .project-card__image {
-            height: 140px;
-            border-radius: var(--radius-sm);
-            display: grid;
-            place-items: center;
-            background: linear-gradient(135deg, #082a3f, #16304a);
-            margin-bottom: var(--spacing-md);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .project-card__image svg {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-card__tags {
-            margin: var(--spacing-xs) 0;
-        }
-
-        .tag {
-            display: inline-block;
-            background: rgba(255,255,255,0.02);
-            padding: var(--spacing-xs) var(--spacing-sm);
-            border-radius: 999px;
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-right: var(--spacing-sm);
-        }
-
-        .project-card__title {
-            font-weight: 700;
-            margin: var(--spacing-xs) 0 4px;
-        }
-
-        .project-card__description {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .project-card__actions {
-            display: flex;
-            gap: var(--spacing-sm);
-            align-items: center;
-        }
-
-        /* ==============================================
-           MODAL
-           ============================================== */
-        .modal {
-            position: fixed;
-            inset: 0;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background: rgba(3,7,18,0.6);
-            z-index: 60;
-            padding: 20px;
-        }
-
-        .modal--open {
-            display: flex;
-        }
-
-        .modal__content {
-            max-width: 900px;
-            width: 100%;
-            border-radius: var(--radius-lg);
-            background: linear-gradient(180deg, #031122, #042033);
-            padding: 14px;
-            box-shadow: var(--shadow-xl);
-        }
-
-        .modal__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .modal__title {
-            font-weight: 800;
-        }
-
-        .modal__body {
-            text-align: center;
-        }
-
-        .modal__body img,
-        .modal__body svg {
-            max-width: 100%;
-            border-radius: var(--radius-sm);
-            display: block;
-        }
-
-        .btn--close {
-            background: transparent;
-            border: 0;
-            color: var(--text-muted);
-            font-weight: 700;
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-        }
-
-        /* ==============================================
-           FOOTER
-           ============================================== */
-        .footer {
-            margin-top: var(--spacing-2xl);
-            color: var(--text-muted);
-            font-size: 13px;
-            text-align: center;
-        }
-
-        /* ==============================================
-           RESPONSIVE DESIGN
-           ============================================== */
         
-        /* Large tablets and small desktops */
-        @media (max-width: 1024px) {
-            .container {
-                max-width: 100%;
-                padding: var(--spacing-lg);
-                margin: 20px auto;
-            }
-
-            .hero {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-lg);
-            }
-
-            .projects-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
+        .quick-links .card:hover {
+            transform: translateY(-10px);
         }
-
-        /* Tablets */
-        @media (max-width: 880px) {
-            .container {
-                padding: var(--spacing-md);
-            }
-
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: var(--spacing-lg);
-            }
-
-            .brand {
-                width: 100%;
-            }
-
-            .brand__logo {
-                width: 46px;
-                height: 46px;
-            }
-
-            .brand__info h1 {
-                font-size: 16px;
-            }
-
-            .nav {
-                width: 100%;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-                gap: var(--spacing-sm);
-            }
-
-            .nav__link {
-                font-size: 13px;
-                padding: var(--spacing-sm) 10px;
-            }
-
-            .hero {
-                padding: var(--spacing-lg);
-            }
-
-            .hero__content h2 {
-                font-size: 26px;
-            }
-
-            .hero__actions {
-                flex-direction: column;
-                align-items: stretch;
-                gap: var(--spacing-sm);
-            }
-
-            .btn {
-                text-align: center;
-                width: 100%;
-            }
-
-            .hero__stats {
-                justify-content: space-between;
-            }
-
-            .stat {
-                flex: 1;
-                text-align: center;
-                font-size: 13px;
-            }
-
-            .card__header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: var(--spacing-sm);
-            }
-
-            .card__meta {
-                text-align: left;
-            }
-
-            .quick-links__preview {
-                height: 160px;
-            }
+        
+        .quick-links i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
-
-        /* Mobile devices */
-        @media (max-width: 640px) {
-            .container {
-                padding: var(--spacing-sm);
-                margin: var(--spacing-md) auto;
-            }
-
-            .header {
-                margin-bottom: var(--spacing-md);
-            }
-
-            .brand__logo {
-                width: 40px;
-                height: 40px;
-                font-size: 14px;
-            }
-
-            .brand__info h1 {
-                font-size: 15px;
-            }
-
-            .brand__subtitle {
-                font-size: 11px;
-            }
-
-            .nav {
-                gap: var(--spacing-xs);
-            }
-
-            .nav__link {
-                font-size: 12px;
-                padding: var(--spacing-xs) var(--spacing-sm);
-            }
-
-            .hero {
-                padding: var(--spacing-md);
-                gap: var(--spacing-md);
-            }
-
-            .hero__content h2 {
-                font-size: 22px;
-                line-height: 1.3;
-            }
-
-            .hero__content p {
-                font-size: 14px;
-            }
-
-            .hero__actions {
-                margin-top: var(--spacing-md);
-            }
-
-            .btn {
-                padding: var(--spacing-sm) var(--spacing-md);
-                font-size: 14px;
-            }
-
-            .hero__stats {
-                flex-direction: row;
-                gap: var(--spacing-sm);
-            }
-
-            .stat {
-                padding: var(--spacing-sm) var(--spacing-sm);
-                font-size: 12px;
-            }
-
-            .card {
-                padding: var(--spacing-md);
-            }
-
-            .card__title {
-                font-size: 15px;
-            }
-
-            .card__subtitle {
-                font-size: 12px;
-            }
-
-            .quick-links__preview {
-                height: 140px;
-            }
-
-            .quick-links__preview svg text:first-of-type {
-                font-size: 60px;
-            }
-
-            .quick-links__preview svg text:last-of-type {
-                font-size: 14px;
-            }
-
-            .quick-links__chips {
-                gap: var(--spacing-xs);
-            }
-
-            .chip {
-                font-size: 11px;
-                padding: var(--spacing-xs) var(--spacing-sm);
-            }
-
-            .section-title {
-                font-size: 18px;
-                margin-top: var(--spacing-lg);
-                margin-bottom: var(--spacing-md);
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-md);
-            }
-
-            .project-card {
-                padding: var(--spacing-md);
-            }
-
-            .project-card__image {
-                height: 120px;
-            }
-
-            .project-card__title {
-                font-size: 15px;
-            }
-
-            .project-card__description {
-                font-size: 12px;
-            }
-
-            .project-card__actions {
-                flex-direction: column;
-                gap: var(--spacing-xs);
-            }
-
-            .btn--ghost {
-                width: 100%;
-                text-align: center;
-            }
-
-            .tag {
-                font-size: 11px;
-                padding: 4px var(--spacing-xs);
-            }
-
-            .modal {
-                padding: var(--spacing-md);
-            }
-
-            .modal__content {
-                padding: var(--spacing-md);
-            }
-
-            .modal__header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: var(--spacing-sm);
-            }
-
-            .btn--close {
-                align-self: flex-end;
-            }
-
-            .footer {
-                font-size: 11px;
-                padding: 0 var(--spacing-sm);
-                line-height: 1.6;
-            }
-        }
-
-        /* Small mobile devices */
-        @media (max-width: 375px) {
-            .hero__content h2 {
-                font-size: 20px;
-            }
-
-            .hero__stats {
-                flex-direction: column;
-            }
-
-            .stat {
-                width: 100%;
-            }
-
-            .quick-links__chips {
-                justify-content: center;
-            }
-
-            .project-card__image {
-                height: 100px;
-            }
-        }
-
-        /* Landscape mobile orientation */
-        @media (max-width: 880px) and (orientation: landscape) {
-            .hero {
-                grid-template-columns: 1fr 300px;
-            }
-
-            .quick-links__preview {
-                height: 180px;
-            }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
     </style>
 </head>
 <body>
-    <!-- Main Container -->
-    <div class="container">
-        
-        <!-- Header -->
-        <header class="header">
-            <a class="brand" href="#" aria-label="BTech Level 8 Home">
-                <div class="brand__logo" aria-hidden="true">B8</div>
-                <div class="brand__info">
-                    <h1>BTech — Level 8</h1>
-                    <div class="brand__subtitle">Final year dashboard & projects</div>
-                </div>
-            </a>
+    <!-- Navigation -->
+    <nav class="navbar glass-dark">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">BTECH<span style="color:var(--accent-primary)">8</span></a>
             
-            <nav class="nav" aria-label="Main navigation">
-                <a class="nav__link" href="/">Home</a>
-                <a class="nav__link" href="/about">About Us</a>
-                <a class="nav__link" href="/contactus">Contact Us</a>
-                <a class="nav__link" href="/gallery">Gallery</a>
-            </nav>
-        </header>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link active">Dashboard</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="gallery.html" class="nav-link">Projects</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="#" class="btn btn-primary">Login <i class="fas fa-sign-in-alt"></i></a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <!-- Hero Section -->
-        <section class="hero" aria-labelledby="hero-title">
-            <div class="hero__content">
-                <h2 id="hero-title">Welcome, Level 8 — Build, Research, Graduate</h2>
-                <p>Curated space for final-year BTech students: manage modules, showcase capstone projects, track research progress and share RP images (Research/Project images).</p>
-
-                <div class="hero__actions">
-                    <a class="btn btn--primary" href="#">Start New Project</a>
-                    <a class="btn" href="#">Explore Modules</a>
-                    <a class="btn" href="#">View Research Guide</a>
-                </div>
-
-                <div class="hero__stats">
-                    <div class="stat">24 Projects</div>
-                    <div class="stat">8 Groups</div>
-                    <div class="stat">120 Resources</div>
-                </div>
-            </div>
-
-            <!-- Quick Links Aside -->
-            <aside class="card" aria-label="Quick access panel">
-                <div class="card__header">
-                    <div>
-                        <div class="card__title">Quick Links</div>
-                        <div class="card__subtitle">Jump directly to common actions</div>
+    <!-- Hero Section -->
+    <section class="hero section">
+        <div class="container">
+            <h1 class="fade-in">Welcome to <span style="background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">BTech Level 8</span></h1>
+            <p class="lead fade-in">
+                Advanced Technology & Innovation Hub. Your dashboard for managing capstone projects, research progress, and collaborative development.
+            </p>
+            
+            <div class="hero-stats fade-in">
+                <div class="stats-grid">
+                    <div class="stat-card card">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3>35</h3>
+                        <p>Active Projects</p>
                     </div>
-                    <div class="card__meta">Level 8 • 2024</div>
+                    <div class="stat-card card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>35+</h3>
+                        <p>Students</p>
+                    </div>
+                    <div class="stat-card card">
+                        <div class="stat-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>15</h3>
+                        <p>Faculty Mentors</p>
+                    </div>
+                    <div class="stat-card card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>2</h3>
+                        <p>Awards Won</p>
+                    </div>
                 </div>
-
-                <div class="quick-links__preview" role="img" aria-label="Research and Project preview">
-                    <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="hero-gradient" x1="0" x2="1" y1="0" y2="1">
-                                <stop offset="0" stop-color="#0ea5a8"/>
-                                <stop offset="1" stop-color="#06b6d4"/>
-                            </linearGradient>
-                        </defs>
-                        <rect width="100%" height="100%" fill="#082033"/>
-                        <g opacity="0.12">
-                            <rect width="100%" height="100%" fill="url(#hero-gradient)"/>
-                        </g>
-                        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="84" font-family="Inter, sans-serif" font-weight="800" fill="rgba(255,255,255,0.95)">RP</text>
-                        <text x="50%" y="72%" dominant-baseline="middle" text-anchor="middle" font-size="18" font-family="Inter, sans-serif" fill="rgba(255,255,255,0.6)">Research / Project Image</text>
-                    </svg>
-                </div>
-
-                <div class="quick-links__chips">
-                    <div class="chip">My Projects</div>
-                    <div class="chip">Capstone</div>
-                    <div class="chip">Mentors</div>
-                    <div class="chip">Timetable</div>
-                    <div class="chip">Submission</div>
-                </div>
-            </aside>
-        </section>
-
-        <!-- Projects Section -->
-        <h3 class="section-title">Latest Projects & RP Images</h3>
-
-        <div class="projects-grid" role="list">
-            
-            <!-- Project 1: Autonomous Navigation -->
-            <article class="project-card" role="listitem">
-                <div class="project-card__image" data-view="rp1" tabindex="0" role="button" aria-label="View Autonomous Vehicle image">
-                    <svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                        <defs>
-                            <linearGradient id="gradient-p1" x1="0" x2="1">
-                                <stop offset="0" stop-color="#0ea5a8"/>
-                                <stop offset="1" stop-color="#06b6d4"/>
-                            </linearGradient>
-                        </defs>
-                        <rect width="100%" height="100%" fill="#041726"/>
-                        <g opacity="0.12"><rect width="100%" height="100%" fill="url(#gradient-p1)"/></g>
-                        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-size="52" font-weight="800" fill="#e6f7f0">RP</text>
-                        <text x="50%" y="72%" text-anchor="middle" font-size="16" fill="#bfeee0">Image — Autonomous Vehicle Simulation</text>
-                    </svg>
-                </div>
-                <div class="project-card__tags">
-                    <span class="tag">AI</span>
-                    <span class="tag">Embedded</span>
-                </div>
-                <h4 class="project-card__title">Autonomous Navigation — Group A</h4>
-                <p class="project-card__description">Simulation results, dataset snapshots and hardware photos collected across trials.</p>
-                <div class="project-card__actions">
-                    <button class="btn btn--ghost" data-view="rp1">View Image</button>
-                    <button class="btn btn--ghost">Open Project</button>
-                </div>
-            </article>
-
-            <!-- Project 2: Energy Harvesting -->
-            <article class="project-card" role="listitem">
-                <div class="project-card__image" data-view="rp2" tabindex="0" role="button" aria-label="View Energy Harvesting image">
-                    <svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                        <rect width="100%" height="100%" fill="#06162a"/>
-                        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-size="52" font-weight="800" fill="#ffd6a5">RP</text>
-                        <text x="50%" y="72%" text-anchor="middle" font-size="16" fill="#ffd6a5">Image — Energy Harvesting</text>
-                    </svg>
-                </div>
-                <div class="project-card__tags">
-                    <span class="tag">Power</span>
-                    <span class="tag">Hardware</span>
-                </div>
-                <h4 class="project-card__title">Nano Energy Harvester</h4>
-                <p class="project-card__description">Prototype photographs, testbench captures and oscilloscope traces in RP images.</p>
-                <div class="project-card__actions">
-                    <button class="btn btn--ghost" data-view="rp2">View Image</button>
-                    <button class="btn btn--ghost">Open Project</button>
-                </div>
-            </article>
-
-            <!-- Project 3: Smart Campus Portal -->
-            <article class="project-card" role="listitem">
-                <div class="project-card__image" data-view="rp3" tabindex="0" role="button" aria-label="View WebApp UI image">
-                    <svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                        <rect width="100%" height="100%" fill="#072031"/>
-                        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-size="52" font-weight="800" fill="#f7a8b8">RP</text>
-                        <text x="50%" y="72%" text-anchor="middle" font-size="16" fill="#f7a8b8">Image — WebApp UI</text>
-                    </svg>
-                </div>
-                <div class="project-card__tags">
-                    <span class="tag">Web</span>
-                    <span class="tag">UI/UX</span>
-                </div>
-                <h4 class="project-card__title">Smart Campus Portal</h4>
-                <p class="project-card__description">Screenshots and concept art included as RP images for deliverables and presentations.</p>
-                <div class="project-card__actions">
-                    <button class="btn btn--ghost" data-view="rp3">View Image</button>
-                    <button class="btn btn--ghost">Open Project</button>
-                </div>
-            </article>
-
-            <!-- Project 4: Warehouse Robot -->
-            <article class="project-card" role="listitem">
-                <div class="project-card__image" data-view="rp4" tabindex="0" role="button" aria-label="View Robotics image">
-                    <svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                        <rect width="100%" height="100%" fill="#081229"/>
-                        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-size="52" font-weight="800" fill="#c7d2fe">RP</text>
-                        <text x="50%" y="72%" text-anchor="middle" font-size="16" fill="#c7d2fe">Image — Robotics</text>
-                    </svg>
-                </div>
-                <div class="project-card__tags">
-                    <span class="tag">Robotics</span>
-                    <span class="tag">Controls</span>
-                </div>
-                <h4 class="project-card__title">Warehouse Robot</h4>
-                <p class="project-card__description">RP images include hardware assembly, test shots and navigation heatmaps used in reports.</p>
-                <div class="project-card__actions">
-                    <button class="btn btn--ghost" data-view="rp4">View Image</button>
-                    <button class="btn btn--ghost">Open Project</button>
-                </div>
-            </article>
-            
-        </div>
-
-        <!-- Footer -->
-        <footer class="footer">
-            © <span id="year"></span> BTech Level 8 — Built for students. • Use RP images to attach photos for reports and presentations.
-        </footer>
-    </div>
-
-    <!-- Modal for RP Images -->
-    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title">
-        <div class="modal__content" role="document">
-            <div class="modal__header">
-                <div id="modal-title" class="modal__title">RP Image</div>
-                <button class="btn btn--close" id="closeBtn" aria-label="Close modal">Close ✕</button>
             </div>
-            <div id="modalContent" class="modal__body">
-                <!-- Dynamic content will be injected here -->
+            
+            <div class="hero-actions fade-in text-center">
+                <a href="gallery.html" class="btn btn-primary" style="margin-right: 1rem;">
+                    Explore Projects <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="contact.html" class="btn btn-secondary">
+                    Contact Us <i class="fas fa-envelope"></i>
+                </a>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="section" style="background: rgba(255,255,255,0.02);">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #1a237e, #311b92);">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag" style="background: rgba(0,212,255,0.1); color: var(--accent-primary);">AI</span>
+                        <span class="tag" style="background: rgba(139,92,246,0.1); color: var(--accent-secondary);">Robotics</span>
+                    </div>
+                    <h3>Autonomous Navigation System</h3>
+                    <p>Deep learning-based autonomous vehicle with real-time obstacle detection and path planning.</p>
+                    <a href="gallery.html" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">View Details</a>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #004d40, #00796b);">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag" style="background: rgba(0,212,255,0.1); color: var(--accent-primary);">IoT</span>
+                        <span class="tag" style="background: rgba(139,92,246,0.1); color: var(--accent-secondary);">Agriculture</span>
+                    </div>
+                    <h3>Smart Agriculture System</h3>
+                    <p>IoT-based precision agriculture with soil monitoring and automated irrigation control.</p>
+                    <a href="gallery.html" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">View Details</a>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #6a1b9a, #8e24aa);">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag" style="background: rgba(0,212,255,0.1); color: var(--accent-primary);">Security</span>
+                        <span class="tag" style="background: rgba(139,92,246,0.1); color: var(--accent-secondary);">Blockchain</span>
+                    </div>
+                    <h3>Blockchain Security Protocol</h3>
+                    <p>Advanced cryptographic protocols for secure digital transactions and identity management.</p>
+                    <a href="gallery.html" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">View Details</a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-3">
+                <a href="gallery.html" class="btn btn-primary">
+                    View All Projects <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Quick Access</h2>
+            
+            <div class="quick-links">
+                <a href="#" class="card">
+                    <div style="font-size: 3rem; color: var(--accent-primary); margin-bottom: 1rem;">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Timetable</h3>
+                    <p>View class schedules and deadlines</p>
+                </a>
+                
+                <a href="#" class="card">
+                    <div style="font-size: 3rem; color: var(--accent-secondary); margin-bottom: 1rem;">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <h3>Submit Project</h3>
+                    <p>Upload your project deliverables</p>
+                </a>
+                
+                <a href="#" class="card">
+                    <div style="font-size: 3rem; color: #00ff88; margin-bottom: 1rem;">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Progress Tracker</h3>
+                    <p>Monitor your project milestones</p>
+                </a>
+                
+                <a href="contact.html" class="card">
+                    <div style="font-size: 3rem; color: #ff6b6b; margin-bottom: 1rem;">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Support</h3>
+                    <p>Get help from mentors and faculty</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3 class="logo">BTECH<span style="color:var(--accent-primary)">8</span></h3>
+                    <p>Advanced Technology & Innovation Program. Preparing tomorrow's tech leaders today.</p>
+                </div>
+                
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="index.html" style="color: var(--text-secondary); text-decoration: none; display: block; padding: 0.3rem 0;">Home</a></li>
+                        <li><a href="about.html" style="color: var(--text-secondary); text-decoration: none; display: block; padding: 0.3rem 0;">About Program</a></li>
+                        <li><a href="gallery.html" style="color: var(--text-secondary); text-decoration: none; display: block; padding: 0.3rem 0;">Projects Gallery</a></li>
+                        <li><a href="contact.html" style="color: var(--text-secondary); text-decoration: none; display: block; padding: 0.3rem 0;">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem; color: var(--accent-primary);"></i> Engineering Building, Floor 3</p>
+                    <p><i class="fas fa-phone" style="margin-right: 0.5rem; color: var(--accent-primary);"></i> +250 788 123 456</p>
+                    <p><i class="fas fa-envelope" style="margin-right: 0.5rem; color: var(--accent-primary);"></i> info@btech-level8.edu</p>
+                </div>
+            </div>
+            
+            <div class="text-center" style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>&copy; <span id="currentYear"></span> BTech Level 8. All rights reserved.</p>
+                <div class="social-links mt-2">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- JavaScript -->
+    <script src="script.js"></script>
     <script>
-        // ============================================
-        // CONFIGURATION
-        // ============================================
-        const CONFIG = {
-            rpImages: {
-                rp1: {
-                    title: 'Autonomous Vehicle — Simulation',
-                    color: '#e6f7f0',
-                    bg: '#041726'
-                },
-                rp2: {
-                    title: 'Nano Energy Harvester — Testbench',
-                    color: '#ffd6a5',
-                    bg: '#06162a'
-                },
-                rp3: {
-                    title: 'Smart Campus Portal — UI Mockups',
-                    color: '#f7a8b8',
-                    bg: '#072031'
-                },
-                rp4: {
-                    title: 'Warehouse Robot — Assembly',
-                    color: '#c7d2fe',
-                    bg: '#081229'
-                }
-            }
-        };
-
-        // ============================================
-        // STATE MANAGEMENT
-        // ============================================
-        const state = {
-            modalOpen: false,
-            currentImage: null
-        };
-
-        // ============================================
-        // DOM ELEMENTS
-        // ============================================
-        const elements = {
-            modal: document.getElementById('modal'),
-            modalContent: document.getElementById('modalContent'),
-            closeBtn: document.getElementById('closeBtn'),
-            yearSpan: document.getElementById('year'),
-            viewButtons: document.querySelectorAll('[data-view]')
-        };
-
-        // ============================================
-        // UTILITY FUNCTIONS
-        // ============================================
-        function generateRPSVG(imageId) {
-            const image = CONFIG.rpImages[imageId] || CONFIG.rpImages.rp4;
-            return `
-                <svg viewBox="0 0 1200 720" width="100%" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100%" height="100%" fill="${image.bg}"/>
-                    <text x="50%" y="48%" text-anchor="middle" dominant-baseline="middle" 
-                          font-size="120" font-weight="800" fill="${image.color}">RP</text>
-                    <text x="50%" y="74%" text-anchor="middle" font-size="26" fill="${image.color}">
-                        ${image.title}
-                    </text>
-                </svg>
-            `;
-        }
-
-        // ============================================
-        // MODAL FUNCTIONS
-        // ============================================
-        function openModal(imageId) {
-            state.modalOpen = true;
-            state.currentImage = imageId;
-            
-            elements.modalContent.innerHTML = generateRPSVG(imageId);
-            elements.modal.classList.add('modal--open');
-            elements.modal.setAttribute('aria-hidden', 'false');
-            
-            // Prevent body scroll when modal is open
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            state.modalOpen = false;
-            state.currentImage = null;
-            
-            elements.modal.classList.remove('modal--open');
-            elements.modal.setAttribute('aria-hidden', 'true');
-            elements.modalContent.innerHTML = '';
-            
-            // Restore body scroll
-            document.body.style.overflow = '';
-        }
-
-        // ============================================
-        // EVENT HANDLERS
-        // ============================================
-        function handleViewButtonClick(event) {
-            const imageId = event.currentTarget.getAttribute('data-view');
-            if (imageId) {
-                openModal(imageId);
-            }
-        }
-
-        function handleModalBackdropClick(event) {
-            if (event.target === elements.modal) {
-                closeModal();
-            }
-        }
-
-        function handleKeyboardEvents(event) {
-            if (event.key === 'Escape' && state.modalOpen) {
-                closeModal();
-            }
-        }
-
-        function handleImageKeyPress(event) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                const imageId = event.currentTarget.getAttribute('data-view');
-                if (imageId) {
-                    openModal(imageId);
-                }
-            }
-        }
-
-        // ============================================
-        // INITIALIZATION
-        // ============================================
-        function init() {
-            // Set current year
-            elements.yearSpan.textContent = new Date().getFullYear();
-
-            // Attach event listeners
-            elements.viewButtons.forEach(button => {
-                button.addEventListener('click', handleViewButtonClick);
-                
-                // Add keyboard support for image containers
-                if (button.classList.contains('project-card__image')) {
-                    button.addEventListener('keypress', handleImageKeyPress);
-                }
-            });
-
-            elements.closeBtn.addEventListener('click', closeModal);
-            elements.modal.addEventListener('click', handleModalBackdropClick);
-            document.addEventListener('keydown', handleKeyboardEvents);
-        }
-
-        // Start the application
-        init();
+        // Set current year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
