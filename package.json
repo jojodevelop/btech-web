@@ -15,9 +15,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/shikamusenge/btech-web/issues"
+    "url": "https://github.com/jojodevelop/btech-web/issues"
   },
-  "homepage": "https://github.com/shikamusenge/btech-web#readme",
+  "homepage": "https://github.com/jojodevelop/btech-web#readme",
   "dependencies": {
     "express": "^5.2.1"
   }
